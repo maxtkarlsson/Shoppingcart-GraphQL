@@ -1,0 +1,42 @@
+type Article {
+  articleId: ID
+  name: String
+  description: String
+  price: Int
+}
+
+type Cart {
+  cartId: ID
+  articles: [Article]
+  articleCount: Int
+  totalPrice: Int
+}
+
+type Query {
+  getCartById(cartId: ID!): Cart
+}
+
+type Mutation {
+  createCart: Cart
+  deleteCartById(cartId: ID!): DeleteCartResponse
+  addArticleToCart(cartId: ID!, articleId: ID!): Cart
+  removeArticleFromCartById(cartId: ID!, articleId: ID!): Cart
+  createArticle(input: createArticleInput!): Article
+  deleteArticleById(articleId: ID!): DeletedArticleResponse
+}
+
+type DeleteCartResponse {
+  deletedId: ID
+  success: Boolean
+}
+
+type DeletedArticleResponse {
+  deletedId: ID
+  success: Boolean
+}
+
+input createArticleInput {
+  name: String!
+  description: String!
+  price: Int!
+}
